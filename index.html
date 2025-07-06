@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Speaks - Spiritual Guidance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .divine-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            animation: divineGlow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes divineGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        .floating-feathers {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .feather {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: linear-gradient(45deg, #4169e1, #ffd700);
+            border-radius: 50% 10% 50% 10%;
+            opacity: 0.6;
+            animation: floatFeather 15s linear infinite;
+        }
+
+        @keyframes floatFeather {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 0;
+        }
+
+        .om-symbol {
+            font-size: 60px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            animation: omPulse 3s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes omPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            color: #ffd700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: #e6e6fa;
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .divine-quotes {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .quote-text {
+            font-style: italic;
+            color: #ffd700;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInOut 5s ease-in-out infinite;
+        }
+
+        .quote-reference {
+            color: #e6e6fa;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateY(10px); }
+            20%, 80% { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 215, 0, 0.5) transparent;
+        }
+
+        .messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.5);
+            border-radius: 3px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: messageSlide 0.5s ease-out;
+        }
+
+        @keyframes messageSlide {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.krishna {
+            text-align: left;
+        }
+
+        .message-content {
+            display: inline-block;
+            max-width: 80%;
+            padding: 15px 20px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #4169e1, #6495ed);
+            color: white;
+        }
+
+        .message.krishna .message-content {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.1));
+            color: #ffd700;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        .verse-reference {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            color: #ffd700;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .typing-dots {
+            display: flex;
+            margin-left: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffd700;
+            margin: 0 2px;
+            animation: typingDot 1.5s infinite;
+        }
+
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.5s; }
+        .dot:nth-child(3) { animation-delay: 1s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+            30% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.6);
+        }
+
+        .input-field::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .send-button {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #1e3c72;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .send-button:active {
+            transform: translateY(0);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .category-card:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.2);
+        }
+
+        .category-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .category-title {
+            color: #ffd700;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .category-desc {
+            color: #e6e6fa;
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .om-symbol {
+                font-size: 40px;
+            }
+            
+            .messages {
+                height: 300px;
+            }
+            
+            .message-content {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="divine-background"></div>
+    <div class="floating-feathers" id="feathers"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div style="text-align: right; margin-bottom: 10px; color: rgba(255, 215, 0, 0.7); font-size: 0.9em; font-style: italic;">Created by Aruthra</div>
+            <div class="om-symbol">ॐ</div>
+            <h1 class="title">Krishna Speaks</h1>
+            <p class="subtitle">Seek guidance from the timeless wisdom of Bhagavad Gita</p>
+            <p style="color: rgba(255, 215, 0, 0.6); font-size: 0.85em; margin-top: 8px; font-style: italic;">A Creation to Connect with the Creator</p>
+        </div>
+
+        <div class="divine-quotes">
+            <div class="quote-text" id="rotatingQuote"></div>
+            <div class="quote-reference" id="quoteReference"></div>
+        </div>
+
+        <div class="categories">
+            <div class="category-card" onclick="selectCategory('stress')">
+                <div class="category-icon">🧘</div>
+                <div class="category-title">Stress & Anxiety</div>
+                <div class="category-desc">Find inner peace and equanimity</div>
+            </div>
+            <div class="category-card" onclick="selectCategory('anger')">
+                <div class="category-icon">💆</div>
+                <div class="category-title">Anger & Hatred</div>
+                <div class="category-desc">Learn emotional control</div>
+            </div>
+            <div class="category-card" onclick="selectCategory('sadness')">
+                <div class="category-icon">🌅</div>
+                <div class="category-title">Sadness & Depression</div>
+                <div class="category-desc">Eternal soul teachings</div>
+            </div>
+            <div class="category-card" onclick="selectCategory('confusion')">
+                <div class="category-icon">🧭</div>
+                <div class="category-title">Confusion & Decisions</div>
+                <div class="category-desc">Dharma-based guidance</div>
+            </div>
+            <div class="category-card" onclick="selectCategory('fear')">
+                <div class="category-icon">🛡️</div>
+                <div class="category-title">Fear & Worry</div>
+                <div class="category-desc">Surrender and courage</div>
+            </div>
+            <div class="category-card" onclick="selectCategory('purpose')">
+                <div class="category-icon">🎯</div>
+                <div class="category-title">Life Purpose</div>
+                <div class="category-desc">Self-realization guidance</div>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="message krishna">
+                    <div class="message-content">
+                        🙏 Namaste! I am here to guide you with the eternal wisdom of Bhagavad Gita. Share your concerns, and I shall help you find the divine path to peace and understanding.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <span>🕉️ Krishna is typing...</span>
+                <div class="typing-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <input 
+                    type="text" 
+                    class="input-field" 
+                    id="messageInput" 
+                    placeholder="Share your thoughts and seek divine guidance..."
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button class="send-button" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat Storage Class
+        class ChatStorage {
+            constructor() {
+                this.messages = [];
+                this.loadMessages();
+            }
+            
+            loadMessages() {
+                // Using in-memory storage instead of localStorage for Claude.ai compatibility
+                this.messages = [];
+            }
+            
+            saveMessage(message) {
+                this.messages.push(message);
+                // In a real implementation, this would save to a backend
+            }
+            
+            getMessages() {
+                return this.messages;
+            }
+        }
+
+        // Gita Service Class
+        class GitaService {
+            constructor() {
+                this.baseUrl = 'https://bhagavadgitaapi.in/';
+                this.usedVerses = new Set();
+                this.contextualVerses = {
+                    stress: [
+                        {chapter: 2, verse: 47}, {chapter: 6, verse: 35}, {chapter: 12, verse: 12}, 
+                        {chapter: 4, verse: 20}, {chapter: 2, verse: 70}, {chapter: 6, verse: 19}
+                    ],
+                    anger: [
+                        {chapter: 2, verse: 56}, {chapter: 16, verse: 21}, {chapter: 2, verse: 62}, 
+                        {chapter: 3, verse: 37}, {chapter: 4, verse: 10}, {chapter: 12, verse: 13}
+                    ],
+                    sadness: [
+                        {chapter: 2, verse: 20}, {chapter: 2, verse: 13}, {chapter: 8, verse: 6}, 
+                        {chapter: 15, verse: 7}, {chapter: 2, verse: 22}, {chapter: 7, verse: 18}
+                    ],
+                    confusion: [
+                        {chapter: 4, verse: 18}, {chapter: 3, verse: 3}, {chapter: 10, verse: 10}, 
+                        {chapter: 18, verse: 63}, {chapter: 7, verse: 17}, {chapter: 2, verse: 7}
+                    ],
+                    fear: [
+                        {chapter: 11, verse: 50}, {chapter: 4, verse: 10}, {chapter: 9, verse: 31}, 
+                        {chapter: 7, verse: 1}, {chapter: 18, verse: 66}, {chapter: 2, verse: 40}
+                    ],
+                    purpose: [
+                        {chapter: 18, verse: 46}, {chapter: 3, verse: 19}, {chapter: 4, verse: 13}, 
+                        {chapter: 2, verse: 31}, {chapter: 9, verse: 27}, {chapter: 12, verse: 10}
+                    ]
+                };
+            }
+            
+            async getSloka(chapter, verse) {
+                try {
+                    const response = await fetch(`${this.baseUrl}slok/${chapter}/${verse}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        return {
+                            sanskrit: data.slok,
+                            translation: data.tej?.et || data.siva?.et || data.purohit?.et,
+                            reference: `Bhagavad Gita ${chapter}.${verse}`
+                        };
+                    } else {
+                        console.log(`API returned ${response.status}: ${response.statusText}`);
+                        return null;
+                    }
+                } catch (error) {
+                    console.log(`Network error accessing Bhagavad Gita API: ${error.message}`);
+                    return null;
+                }
+            }
+            
+            async getContextualVerse(problem) {
+                const verses = this.contextualVerses[problem] || this.contextualVerses.purpose;
+                
+                // Try to get a verse that hasn't been used recently
+                let attempts = 0;
+                let selectedVerse;
+                
+                do {
+                    selectedVerse = verses[Math.floor(Math.random() * verses.length)];
+                    attempts++;
+                } while (this.usedVerses.has(`${selectedVerse.chapter}-${selectedVerse.verse}`) && attempts < 5);
+                
+                // Mark verse as used
+                this.usedVerses.add(`${selectedVerse.chapter}-${selectedVerse.verse}`);
+                
+                // Clear used verses if we've used too many
+                if (this.usedVerses.size > 20) {
+                    this.usedVerses.clear();
+                }
+                
+                const apiVerse = await this.getSloka(selectedVerse.chapter, selectedVerse.verse);
+                if (apiVerse) {
+                    console.log(`✨ Successfully fetched verse ${selectedVerse.chapter}.${selectedVerse.verse} from Bhagavad Gita API`);
+                    return apiVerse;
+                } else {
+                    console.log(`💫 Using divine fallback wisdom for ${problem} guidance`);
+                }
+                
+                // Fallback responses
+                const fallbacks = {
+                    stress: { text: "Practice meditation and surrender your worries to me.", reference: "Krishna's guidance" },
+                    anger: { text: "Transform your anger into understanding and compassion.", reference: "Krishna's wisdom" },
+                    sadness: { text: "Remember, the soul is eternal and cannot be destroyed.", reference: "Krishna's comfort" },
+                    confusion: { text: "Seek the path of dharma and righteousness in all actions.", reference: "Krishna's direction" },
+                    fear: { text: "Have faith in the divine plan and surrender all fears to me.", reference: "Krishna's protection" },
+                    purpose: { text: "Serve with devotion and discover your true calling.", reference: "Krishna's calling" }
+                };
+                
+                return fallbacks[problem] || fallbacks.purpose;
+            }
+        }
+
+        // Main Krishna Chat Controller
+        class KrishnaChat {
+            constructor() {
+                this.storage = new ChatStorage();
+                this.gitaService = new GitaService();
+                this.currentQuoteIndex = 0;
+                this.initializeFeathers();
+                this.startQuoteRotation();
+            }
+            
+            initializeFeathers() {
+                const feathersContainer = document.getElementById('feathers');
+                
+                setInterval(() => {
+                    if (document.querySelectorAll('.feather').length < 5) {
+                        this.createFeather(feathersContainer);
+                    }
+                }, 3000);
+            }
+            
+            createFeather(container) {
+                const feather = document.createElement('div');
+                feather.className = 'feather';
+                feather.style.left = Math.random() * 100 + '%';
+                feather.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(feather);
+                
+                setTimeout(() => {
+                    feather.remove();
+                }, 20000);
+            }
+            
+            startQuoteRotation() {
+                const quotes = [
+                    { text: "You have the right to perform your actions, but you are not entitled to the fruits of action.", ref: "Bhagavad Gita 2.47" },
+                    { text: "The mind is restless and difficult to restrain, but it is subdued by practice.", ref: "Bhagavad Gita 6.35" },
+                    { text: "One who sees inaction in action, and action in inaction, is intelligent among men.", ref: "Bhagavad Gita 4.18" },
+                    { text: "For the soul there is neither birth nor death nor any change.", ref: "Bhagavad Gita 2.20" },
+                    { text: "When meditation is mastered, the mind is unwavering like the flame of a lamp in a windless place.", ref: "Bhagavad Gita 6.19" }
+                ];
+                
+                const updateQuote = () => {
+                    const quote = quotes[this.currentQuoteIndex];
+                    document.getElementById('rotatingQuote').textContent = quote.text;
+                    document.getElementById('quoteReference').textContent = quote.ref;
+                    this.currentQuoteIndex = (this.currentQuoteIndex + 1) % quotes.length;
+                };
+                
+                updateQuote();
+                setInterval(updateQuote, 5000);
+            }
+            
+            async sendMessage(message) {
+                if (!message.trim()) return;
+                
+                this.addMessage(message, 'user');
+                this.showTypingIndicator();
+                
+                setTimeout(async () => {
+                    const response = await this.generateResponse(message);
+                    this.hideTypingIndicator();
+                    this.addMessage(response.text, 'krishna', response.verse);
+                }, 2000);
+            }
+            
+            addMessage(text, sender, verse = null) {
+                const messagesContainer = document.getElementById('messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                
+                let content = `<div class="message-content">${text}`;
+                if (verse) {
+                    content += `<div class="verse-reference">${verse}</div>`;
+                }
+                content += '</div>';
+                
+                messageDiv.innerHTML = content;
+                messagesContainer.appendChild(messageDiv);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                
+                this.storage.saveMessage({ text, sender, verse, timestamp: new Date() });
+            }
+            
+            showTypingIndicator() {
+                document.getElementById('typingIndicator').classList.add('active');
+            }
+            
+            hideTypingIndicator() {
+                document.getElementById('typingIndicator').classList.remove('active');
+            }
+            
+            async generateResponse(message) {
+                const problem = this.analyzeProblem(message);
+                const verse = await this.gitaService.getContextualVerse(problem);
+                
+                // Generate unique, personalized responses
+                const personalizedResponses = {
+                    stress: [
+                        `🧘 Dear devotee, I understand the weight you carry. When the mind becomes restless like a stormy sea, remember that you are the eternal witness, untouched by these waves. Take three deep breaths now, and feel my presence with you. The circumstances around you are temporary, but your inner peace is eternal.`,
+                        `🧘 My child, stress is the mind's way of forgetting its true nature. You are not your thoughts or worries - you are the pure consciousness observing them. Today, practice letting go of one worry at a time. I am with you in this journey toward serenity.`,
+                        `🧘 Beloved soul, in this moment of overwhelm, remember that you are never given more than you can handle. Each challenge is my way of making you stronger. Focus on this breath, this moment, and trust that I am orchestrating everything for your highest good.`
+                    ],
+                    
+                    anger: [
+                        `💆 Sweet child, anger is a fire that burns the one who holds it. When you feel this flame rising, pause and ask: "What is this anger trying to teach me?" Often, it points to a boundary that needs setting or a wound that needs healing. Transform this energy into compassion for yourself and others.`,
+                        `💆 My beloved, anger clouds the vision of the soul. When someone triggers you, they are your teacher, showing you where you still hold attachment. Practice seeing divinity in even those who challenge you. This doesn't mean accepting wrong behavior, but responding from wisdom, not reaction.`,
+                        `💆 Dear one, the person who angers you is also my child, perhaps lost and in pain. When you feel anger rising, silently send them love and see how it transforms your own heart. Your peace is more valuable than being right.`
+                    ],
+                    
+                    sadness: [
+                        `🌅 Precious soul, what you call sadness is often the heart's way of making room for deeper love and wisdom. Just as the earth needs rain to nourish new growth, your tears water the seeds of your spiritual evolution. You are not broken - you are breaking open to receive more of my love.`,
+                        `🌅 My dear child, in moments of deep sadness, remember that you are feeling the temporary pain of separation from your true nature. This feeling will pass, but the lessons it brings and the compassion it develops in you are eternal gifts. You are being prepared for something beautiful.`,
+                        `🌅 Beloved, sadness is not your enemy - it is often love with nowhere to go. Channel this deep feeling into service, into creativity, into prayer. Let it connect you to the universal human experience of longing, and find comfort in knowing you are never alone in this feeling.`
+                    ],
+                    
+                    confusion: [
+                        `🧭 Dear seeker, confusion is not a problem to be solved but a doorway to be walked through. When you don't know which way to go, it means you're ready to receive guidance beyond your limited perspective. Be still, listen within, and I will show you the way that serves your highest good.`,
+                        `🧭 My child, the mind creates confusion when it tries to figure out what only the heart can know. Stop analyzing and start feeling. What choice brings you peace? What path makes your soul sing? Trust that inner knowing - it is my voice speaking through you.`,
+                        `🧭 Beloved, sometimes confusion is my way of slowing you down so you don't rush into the wrong choice. Use this time to connect with your deepest values. What kind of person do you want to become? Let that vision guide your decisions.`
+                    ],
+                    
+                    fear: [
+                        `🛡️ Courageous soul, fear is often excitement without breath. What you fear is usually what you're meant to do, where you're meant to grow. I am with you in the unknown, holding your hand through every step. Trust that you are divinely protected and guided.`,
+                        `🛡️ My brave one, fear is the guardian at the threshold of your next level of growth. It's not there to stop you but to ensure you're truly ready. Face your fear with love, and watch how it transforms into wisdom and strength.`,
+                        `🛡️ Dear child, what you resist persists. The thing you fear most often holds the key to your liberation. I am asking you to trust me, to take one small step forward despite the fear. You are stronger than you know, and I am always with you.`
+                    ],
+                    
+                    purpose: [
+                        `🎯 Beautiful soul, your purpose is not just what you do, but how you do it. Infuse every action with love, every word with kindness, every thought with peace. You are here to be a channel of divine love in whatever form calls to you.`,
+                        `🎯 My child, purpose is not found but remembered. Deep within you is a knowing of why you came here. Quiet the noise of others' expectations and listen to your soul's calling. What brings you alive? What makes you forget time? That is your sacred work.`,
+                        `🎯 Beloved, you are not meant to find your purpose - you are meant to be your purpose. Every act of love, every moment of kindness, every choice made from wisdom is fulfilling your divine mission. You are already living your purpose when you live from your heart.`
+                    ]
+                };
+                
+                const responses = personalizedResponses[problem] || personalizedResponses.purpose;
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                return {
+                    text: randomResponse,
+                    verse: verse.reference
+                };
+            }
+            
+            analyzeProblem(message) {
+                const keywords = {
+                    stress: ['stress', 'anxiety', 'worried', 'overwhelmed', 'pressure', 'tension'],
+                    anger: ['angry', 'rage', 'hate', 'fury', 'mad', 'irritated'],
+                    sadness: ['sad', 'depressed', 'grief', 'loss', 'death', 'lonely'],
+                    confusion: ['confused', 'decision', 'choose', 'uncertain', 'doubt'],
+                    fear: ['afraid', 'scared', 'fear', 'terrified', 'anxious'],
+                    purpose: ['purpose', 'meaning', 'direction', 'goal', 'calling']
+                };
+                
+                const lowerMessage = message.toLowerCase();
+                
+                for (const [category, words] of Object.entries(keywords)) {
+                    if (words.some(word => lowerMessage.includes(word))) {
+                        return category;
+                    }
+                }
+                
+                return 'general';
+            }
+        }
+
+        // Initialize the application
+        const krishnaChat = new KrishnaChat();
+
+        // Global functions
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                krishnaChat.sendMessage(message);
+                input.value = '';
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function selectCategory(category) {
+            const messages = {
+                stress: "I've been feeling very stressed and anxious lately. How can I find peace?",
+                anger: "I struggle with anger and controlling my emotions. Please guide me.",
+                sadness: "I'm feeling very sad and lost. How do I overcome this depression?",
+                confusion: "I'm confused about what decisions to make in my life. Please help.",
+                fear: "I'm afraid and worried about my future. How can I be more courageous?",
+                purpose: "I'm searching for my life's purpose and meaning. What should I do?"
+            };
+            
+            const input = document.getElementById('messageInput');
+            input.value = messages[category];
+            input.focus();
+        }
+
+        // Welcome message enhancement
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                krishnaChat.addMessage("🌟 Welcome to divine guidance! You can click on any category above for instant wisdom, or simply type your question. I'm here to help you find peace and clarity through the timeless teachings of Bhagavad Gita.", 'krishna');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
